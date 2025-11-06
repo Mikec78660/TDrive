@@ -22,7 +22,7 @@
 #include "stdafx.h"
 #include "CacheManager.h"
 
-#include <attr/xattr.h>
+#include <sys/xattr.h>
 
 
 namespace bdt
@@ -402,7 +402,7 @@ namespace bdt
         if ( name == ATTRIBUTE_ONLINE ) {
             OnlineState state = OnlineStateUnknown;
             if ( ! GetOnline(state) ) {
-                errno = ENOATTR;
+                errno = ENODATA;
                 return false;
             }
             if ( buf == NULL || bufsize == 0 ) {
@@ -420,7 +420,7 @@ namespace bdt
         }
 
         if ( ! CheckExtendedAttribute(name) ) {
-            errno = ENOATTR;
+            errno = ENODATA;
             return false;
         }
 
@@ -432,7 +432,7 @@ namespace bdt
     Inode::SetExtendedAttribute(const string & name,const void * buf,int size)
     {
         if ( ! CheckExtendedAttribute(name) ) {
-            errno = ENOATTR;
+            errno = ENODATA;
             return false;
         }
 
@@ -463,7 +463,7 @@ namespace bdt
     Inode::DeleteExtendedAttribute(const string & name)
     {
         if ( ! CheckExtendedAttribute(name) ) {
-            errno = ENOATTR;
+            errno = ENODATA;
             return false;
         }
 

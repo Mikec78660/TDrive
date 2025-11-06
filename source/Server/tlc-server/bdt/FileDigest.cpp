@@ -53,7 +53,7 @@ namespace bdt
                 engine_.begin(),
                 engine_.end(),
                 boost::bind(
-                        &EVP_MD_CTX_destroy,
+                        &EVP_MD_CTX_free,
                         boost::bind(&EngineMap::value_type::second,_1) ) );
     }
 
@@ -91,7 +91,7 @@ namespace bdt
                 return false;
             }
             if ( 0 == EVP_DigestInit_ex(ctx,md,NULL) ) {
-                EVP_MD_CTX_destroy(ctx);
+                EVP_MD_CTX_free(ctx);
                 return false;
             }
             engine_.insert(EngineMap::value_type(digest,ctx));
@@ -224,7 +224,7 @@ namespace bdt
         unsigned char digestValue[EVP_MAX_MD_SIZE];
         unsigned int digestSize;
         EVP_DigestFinal_ex(iterEngine->second,digestValue,&digestSize);
-        EVP_MD_CTX_destroy(iterEngine->second);
+        EVP_MD_CTX_free(iterEngine->second);
         engine_.erase(iterEngine);
 
         for ( unsigned int i = 0; i < digestSize; ++i ) {
@@ -237,4 +237,3 @@ namespace bdt
     }
 
 }
-

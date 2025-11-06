@@ -25,6 +25,7 @@
 #include <cstdlib>
 #include <cassert>
 #include <cstring>
+#include <cerrno>
 
 
 #include <string>
@@ -72,4 +73,3 @@ namespace fs = boost::filesystem;
 
 #include "../lib/common/Common.h"
 #include "Factory.h"
-
