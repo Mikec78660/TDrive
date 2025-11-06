@@ -93,7 +93,7 @@ namespace bdt
         total_ = 1;
         manifest_ = "";
 
-        PyObject * content = PyString_FromString(meta.c_str());
+        PyObject * content = PyUnicode_FromString(meta.c_str());
         PyObject * args = PyTuple_New(1);
         PyTuple_SetItem(args, 0, content);
         PyObject * result = PyObject_CallObject(function_,args);
@@ -109,7 +109,7 @@ namespace bdt
             Py_DECREF(result);
             return false;
         } else {
-            name_ = PyString_AsString(valueName);
+            name_ = PyUnicode_AsUTF8(valueName);
         }
 
         PyObject * valueSingle = PyDict_GetItemString(result, SwiftKeySingle.c_str());
@@ -142,7 +142,7 @@ namespace bdt
         if ( valueManifest != NULL ) {
             isMultiple_ = true;
             isManifest_ = true;
-            manifest_ = PyString_AsString(valueManifest);
+            manifest_ = PyUnicode_AsUTF8(valueManifest);
             boost::smatch what;
             if ( boost::regex_match(
                     manifest_, what, manifestPattern, boost::match_extra ) ) {

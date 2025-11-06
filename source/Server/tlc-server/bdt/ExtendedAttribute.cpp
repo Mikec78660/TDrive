@@ -21,7 +21,7 @@
 
 #include "stdafx.h"
 
-#include <attr/xattr.h>
+#include <sys/xattr.h>
 #include <boost/regex.hpp>
 
 
@@ -245,4 +245,3 @@ namespace bdt
 
 
 }
-

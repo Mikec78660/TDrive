@@ -173,7 +173,7 @@ namespace bdt
             bool
             operator() (
                     const RequestData & data1,
-                    const RequestData & data2)
+                    const RequestData & data2) const
             {
                 if ( data1.priority > data2.priority ) {
                     return true;
@@ -237,4 +237,3 @@ namespace bdt
     };
 
 }
-
